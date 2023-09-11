@@ -7,12 +7,14 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+require("dotenv").config();
+
 app.get("/", function(req, res){
     res.sendFile(__dirname + "/index.html")
 });
 app.post("/", function (req,res) { 
     const query = req.body.cityName;
-    const apiKey = "4b61bb03aba7de0a782a0904884e0a6b";
+    const apiKey = process.env.weather_API_KEY;
     const units = "metric";
     const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&units=" + units + "&appid=" +apiKey;
 
